@@ -2,6 +2,7 @@
 
 # Ignore the simulation settings text file
 Sumulation Settings.txt
+Evaluation.txt
 
 # Ignore specific Matlab script files
 intvl_cnsr_cvx_loglikelihood_class_1.m

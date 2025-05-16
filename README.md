@@ -58,6 +58,15 @@ Across both simulation studies, the following settings are generally applied:
     * Right-censored observations: 40% 
     * Case II interval-censored observations: 10% 
 
+## Evaluation Criteria
+
+The performance of the methods is evaluated based on the following criteria:
+
+1.  **Selection Frequency**: The frequencies that the selected models from the dimension reduction step include all the variables in the true model. This criterion measures the method's ability to correctly screen out unimportant variables.
+2.  **Coverage Probability**: The sample proportion that the confidence interval contains the true value of $\beta$.
+3.  **Type I error ($\alpha$)**: The sample proportion of rejecting $H_0: \beta^*_j = 0, j=1, \ldots, p,$ given that $H_0$ is true.
+4.  **Testing Power**: The sample proportion of rejecting $H_0$ given the true value of $\beta$. i.e., the frequency with which the final models include all the variables in the true model (controlled by the significance level 0.05).
+
 ## How to Cite (subject to further update)
 
 If you use these codes or methods in your research, please cite the associated paper:
