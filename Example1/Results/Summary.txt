@@ -1,0 +1,29 @@
+Selection frequency from testing_unbiased_pv: 1 0.96 0.73 0.98 1
+# Selection frequency for 0s from testing_unbiased_pv: 0
+Selection frequency from testing_biased_pv: 0.17 0 0 0.04 0.3
+# Selection frequency for 0s from testing_biased_pv: 0
+Active set from each replication-unbiased-pvalue: 1 50 100 150 200 NA NA
+Active set from each replication-biased: 
+Average of asympotic SE - unbiased: 0.13 0.11 0.109 0.116 0.145
+Average of asympotic SE for 0s - unbiased: 0.094
+Average of asympotic SE - biased: 0.287 0.27 0.258 0.272 0.33
+Average of asympotic SE for 0s - biased: 0.197
+Selection frequency: 0.965 0.555 0.252 0.727 0.997
+# Selection frequency for 0s: 0.002
+Empirical SE for beta hat: 0.14 0.109 0.107 0.117 0.143
+Empirical SE for beta hat for 0s: 0.093
+Final estimator beta hat: -1.019 -0.685 0.523 0.778 1.237
+Final estimator beta hat for 0s: 0
+Coverage Prob - unbiased: 0.93 0.94 0.93 0.93 0.93
+Coverage Prob for 0s - unbiased: 0.952
+Coverage Prob - biased: 1 1 1 1 1
+Coverage Prob for 0s - biased: 1
+Alpha Level - unbiased: 0.07 0.06 0.07 0.07 0.07
+alpha level for 0s - unbiased: 0.048
+Alpha Level - biased: 0 0 0 0 0
+alpha level for 0s - biased: 0
+Bias 0.181 0.115 -0.077 -0.122 -0.263
+Bias for 0s: 0
+Empirical Type I error rate for 0s: 0.05045226
+[1] 100
+
