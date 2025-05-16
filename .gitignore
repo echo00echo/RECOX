@@ -1,0 +1,48 @@
+# .gitignore for RECOX project
+
+# Ignore the simulation settings text file
+Sumulation Settings.txt
+
+# Ignore specific Matlab script files
+intvl_cnsr_cvx_loglikelihood_class_1.m
+intvl_cnsr_cvx_loglikelihood_maximize_class_1.m
+intvl_cnsr_loglikelihood_class_3.m
+
+# General ignores (optional, but good practice)
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
