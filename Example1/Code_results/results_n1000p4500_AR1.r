@@ -24,16 +24,9 @@ library(cowplot)
 library(installr)
 library(qqplotr)
 
-
-rm(list=ls())
-setwd("C:/Users/echo0/Box Sync/RuiYang/Project3-IntervalCensoring/Code/Results/Case3_simulation/n1000p4500/Hera/20230306_1_46_100")
-
-
-#a <- loadWorkbook('C:/Users/echo0/Box Sync/RuiYang/Project3-IntervalCensoring/Code/1026/yourExcel1.xlsx')
-#b <- loadWorkbook('C:/Users/echo0/Box Sync/RuiYang/Project3-IntervalCensoring/Code/1026/yourExcel5.xlsx')
-a <- loadWorkbook('C:/Users/echo0/Box Sync/RuiYang/Project3-IntervalCensoring/Code/Results/Case3_simulation/n1000p4500/Hera/20230306_1_46_100/n1000p4500_beta_p_ar1.xlsx')
-b <- loadWorkbook('C:/Users/echo0/Box Sync/RuiYang/Project3-IntervalCensoring/Code/Results/Case3_simulation/n1000p4500/Hera/20230306_1_46_100/n1000p4500_sample_p_ar1.xlsx')
-c <- loadWorkbook('C:/Users/echo0/Box Sync/RuiYang/Project3-IntervalCensoring/code/Results/Case3_simulation/n1000p4500/Hera/20230306_1_46_100/n1000p4500_screening_sample_p.xlsx')
+a <- loadWorkbook('C:/Users/n1000p4500_beta_p_ar1.xlsx')
+b <- loadWorkbook('C:/Users/n1000p4500_sample_p_ar1.xlsx')
+c <- loadWorkbook('C:/Users/n1000p4500_screening_sample_p.xlsx')
 #sheetNames <- sheets(a)
 #for(i in 1:length(sheetNames))
 #{
@@ -155,21 +148,12 @@ for (k in 1:100){
   cat("\n")
   
   
-  
-  
-  
-  
-  
-  
-  
   pvs_b<-2*(1-pnorm(abs(Bet_SPARES)/sds_b))  #p-value biased
   nzero_b_pv <- (1:p)[pvs_b<0.05/p & !is.na(pvs_b)] #non-zero signals chosen by biased p-values and Bonferroni correction
 
   
-  
   nzero_b_pv.all <-  c(nzero_b_pv.all, unlist(nzero_b_pv))#non-zero signals chosen by biased p-values and Bonferroni correction at each replication
  
-  
   
   # Selection frequency (from testing) for each beta_j based on biased pvalue 
   temptable <- table(nzero_b_pv.all) # frequency of each beta.j to be selected
@@ -188,13 +172,6 @@ for (k in 1:100){
   cat("\n")
   
   
-  
-  
-
-
-  
-  
-  
   # unbiased pvalues from each replication
   pvalues_u <-  rbind(pvalues_u, c(pvs_u)) 
   
@@ -203,7 +180,6 @@ for (k in 1:100){
   pvalues_b <-  rbind(pvalues_b, c(pvs_b)) 
   
 
-  
   # active set from each replication - unbiased - pvalue
   nzero_u_pv #non-zero signals chosen by unbiased p-values and Bonferroni correction
   cat("Active set from each replication-unbiased-pvalue:", nzero_u_pv)
@@ -217,31 +193,10 @@ for (k in 1:100){
   
   cat("\n")
   
-
-  
-  
-  ### unbiased TP & FP based on the test
-  #TP.LASSO_u <- c(TP.LASSO_u, sum(as.numeric(nzero_u %in% c(1, 2, 6, 7, 10))))
-  #FP.LASSO_u <- c(FP.LASSO_u, sum(as.numeric(nzero_u %in% c(3:5, 8, 9))))
-  #cat('TP_u:', mean(TP.LASSO_u))  
-  #cat("\n")
-  #cat('FP_u:', mean(FP.LASSO_u))  
-  #cat("\n")
-  
-  
-  ### biased TP & FP based on the test
-  #TP.LASSO_b <- c(TP.LASSO_b, sum(as.numeric(nzero_b %in% c(1, 2, 6, 7, 10))))
-  #FP.LASSO_b <- c(FP.LASSO_b, sum(as.numeric(nzero_b %in% c(3:5, 8, 9))))
-  #cat('TP_b:', mean(TP.LASSO_b))  
-  #cat("\n")
-  #cat('FP_b:', mean(FP.LASSO_b))  
-  #cat("\n")
-  
   
   
   # asympotic SE from each replication
   ase_u <-  rbind(ase_u, c(sds_u)) 
-  
   
   
   # asympotic SE from each replication
@@ -268,8 +223,6 @@ for (k in 1:100){
   ave_0_ase_final_b <- round(mean(ase_final_b[c(2:49, 51:99, 101:149, 151:199, 201:1000)], na.rm=TRUE), 3) 
   cat('Average of asympotic SE for 0s - biased:', ave_0_ase_final_b)
   cat("\n")
-  
-  
   
   
   
@@ -436,41 +389,6 @@ for (k in 1:100){
   cat('Empirical Type I error rate for 0s:', ave_0_alpha_level)
   cat("\n")
   
-  # Oracle estimation
-#  oracle <- round(colMeans(bet.oracle.all), 3)
-#  cat('Oracle', oracle[c(1,2,6,7,10)])
-#  cat("\n")
-  
-  
-  
-#  ave_0_oracle <- round(mean(oracle[c(3:5, 8 ,9)]), 3) 
-#  cat('Oracle for 0s:', ave_0_oracle)
-#  cat("\n")
-  
-  
-  
-  # Empirical SE for oracle
-#  for (i in 1:length(bet.oracle.all[1, ])) {
-    #  ese_oracle[i] <- sd(bet.oracle.all[, i])/sqrt(sum(!is.na(bet.oracle.all[, i])))
-#    ese_oracle[i] <- sd(bet.oracle.all[, i])   
-#  }
-#  cat('Empirical SE for oracle:', round(ese_oracle, 3)[c(1,2,6,7,10)])
-#  cat("\n")
-  
-  
-  
-#  ave_0_ese_oracle <- round(mean(ese_oracle[c(3:5, 8 ,9)]), 3) 
-#  cat('Empirical SE for oracle:', ave_0_ese_oracle)
-#  cat("\n")
-  
-  
-  
-  # MSE
-#  MSE.LASSO <- c(MSE.LASSO, matrix(c(Bet_SPARES-bet0),1,p)%*%VarCovS%*%t(matrix(c(Bet_SPARES-bet0),1,p)))
-#  cat('MSE', round(median(MSE.LASSO),3)) 
-#  cat("\n")
-#  cat('SD of MSE', round(sd(MSE.LASSO),3)) 
-#  cat("\n")
   
   print(k)  
   flush.console()
@@ -482,12 +400,6 @@ for (k in 1:100){
 
 
 # Outputs
-#bet.oracle.all
-#bet.rec
-#pvalues
-#ase
-#sds
-#vars.all
 
 write.csv(vars_b.all,'Vars_b_ar1_B400_n1000.csv')
 write.csv(vars_u.all,'Vars_u_ar1_B400_n1000.csv')
@@ -521,113 +433,3 @@ cat(capture.output(print(mylist), file="ar1_n1000_p4500_IC1_AR1.txt"))
 
 #order(colMeans(pvalues_b))
 #round(colMeans(pvalues_b),7)
-
-# 
-# 
-# est <- bet.final[c(1, 50, 100, 150, 200)]
-# truth <- bet[c(1, 50, 100, 150, 200)]
-# 
-# L_u <- round(colMeans(LL_u)[c(1,50,100,150,200)], 3)
-# U_u <- round(colMeans(UL_u)[c(1,50,100,150,200)], 3)
-# ave_0_L_u <- mean(colMeans(LL_u, na.rm=TRUE)[c(2:49, 51:99, 101:149, 151:199, 201:4500)], na.rm=TRUE)
-# ave_0_U_u <- mean(colMeans(UL_u, na.rm=TRUE)[c(2:49, 51:99, 101:149, 151:199, 201:4500)], na.rm=TRUE) 
-# 
-# 
-# 
-# 
-# testplot <- read_excel("plot_data.xlsx")
-# testplot1  <- read_excel("plot_data_AR1.xlsx")
-# testplot2  <- read_excel("plot_data_CS.xlsx")
-# 
-# 
-# plot(x = testplot2$position, y = testplot2$truth, ylim = c(-1.5, 1.8), type = 'p', col = 'red', pch = 1, lwd = 2, cex = 2,
-#      xlab = "Position", ylab = "Value", xaxt = "n", main = "n=500, p=1000, CS")
-# er <- (testplot2$CIU - testplot2$CIL)/2
-# plotCI(x = testplot2$position, y = testplot2$truth, er, err="y", slty=par("lty"), add=TRUE)
-# points(x= testplot2$position, y =  testplot2$b_est, type = 'p', col = 'green', pch = 3, lwd = 2, cex = 2)
-# abline(h=0, col="blue", lty=2)
-# axis(1,                         # Define x-axis manually
-#      at = c(0, 50,100, 150, 200, 250),
-#      labels = c("1", "50", "100", "150", "200", "averaged 0s'"))
-# 
-# legend("bottomright", pch = c(1, 3), lty = c(NA, NA), legend = c("Truth", "Estimate"),
-#        lwd = 3, col = c("red", "green", "blue"))
-# 
-# 
-# 
-# # Make the window wider than taller
-# #windows(width = 4.5, height = 4)
-# 
-# 
-# par()
-# windows()
-# par(mfrow=c(3,1))
-# 
-# # Save current graphical parameters
-# #opar <- par(no.readonly = TRUE)
-# 
-# 
-# 
-# # Change the margins of the plot (the fourth is the right margin)
-# #par(mar = c(6, 4.1, 4.1, 2.1))
-# 
-# 
-# plot(x = testplot$position, y = testplot$truth, ylim = c(-1.5, 1.8), type = 'b', col = 'red', pch = 16, lwd = 6, xlab = " ", ylab = "Value", xaxt = "n", main = "n=500, p=1000, Identity", cex.main = 3)
-# #polygon(c(testplot$position,rev(testplot$position)),c(testplot$CIL,rev(testplot$CIU)),col = rgb(1,1,1), border = NA)
-# #plot(x = x_raw, y = y,type = 'p')
-# lines(x= testplot$position, y = testplot$CIL, lty = 'dashed', col = 'blue', lwd = 4)
-# lines(x= testplot$position, y =  testplot$b_est, type = 'b', col = 'green', pch = 1, lwd = 2)
-# lines(x= testplot$position, y =  testplot$CIU, lty = 'dashed', col = 'blue', lwd = 4)
-# axis(1,                         # Define x-axis manually
-#      at = c(0, 50,100, 150, 200, 250),
-#      labels = c("1", "50", "100", "150", "200", "averaged 0s'"))
-# # Adding a legend
-# #legend("bottomright", lty = c(1, 1, 2), legend = c("Truth", "Estimate", "95% CI"),
-# #       lwd = 3, col = c("red", "green", "blue"))
-# 
-# 
-# 
-# 
-# 
-# 
-# plot(x = testplot1$position, y = testplot1$truth, ylim = c(-1.5, 1.8), type = 'b', col = 'red', pch = 16, lwd = 6, xlab = " ", ylab = "Value", xaxt = "n", main = "n=500, p=1000, AR(1)", cex.main = 3)
-# #polygon(c(testplot1$position,rev(testplot1$position)),c(testplot1$CIL,rev(testplot1$CIU)),col = rgb(1,1,1), border = NA)
-# #plot(x = x_raw, y = y,type = 'p')
-# lines(x= testplot1$position, y = testplot1$CIL, lty = 'dashed', col = 'blue', lwd = 4)
-# lines(x= testplot1$position, y =  testplot1$b_est, type = 'b', col = 'green', pch = 1, lwd = 2)
-# lines(x= testplot1$position, y =  testplot1$CIU, lty = 'dashed', col = 'blue', lwd = 4)
-# axis(1,                         # Define x-axis manually
-#      at = c(0, 50,100, 150, 200, 250),
-#      labels = c("1", "50", "100", "150", "200", "averaged 0s'"))
-# # Adding a legend
-# #legend("bottomright", lty = c(1, 1, 2), legend = c("Truth", "Estimate", "95% CI"),
-# #       lwd = 3, col = c("red", "green", "blue"))
-# 
-# 
-# 
-# plot(x = testplot2$position, y = testplot2$truth, ylim = c(-1.5, 1.8), type = 'b', col = 'red', pch = 16, lwd = 6, xlab = " ", ylab = "Value", xaxt = "n", main = "n=500, p=1000, CS", cex.main = 3)
-# #polygon(c(testplot2$position,rev(testplot2$position)),c(testplot2$CIL,rev(testplot2$CIU)),col = rgb(1,1,1), border = NA)
-# #plot(x = x_raw, y = y,type = 'p')
-# lines(x= testplot2$position, y = testplot2$CIL, lty = 'dashed', col = 'blue', lwd = 4)
-# lines(x= testplot2$position, y =  testplot2$b_est, type = 'b', col = 'green', pch = 1, lwd = 2)
-# lines(x= testplot2$position, y =  testplot2$CIU, lty = 'dashed', col = 'blue', lwd = 4)
-# axis(1,                         # Define x-axis manually
-#      at = c(0, 50,100, 150, 200, 250),
-#      labels = c("1", "50", "100", "150", "200", "averaged 0s'"))
-# 
-# # Adding a legend
-# #legend("bottomright", lty = c(1, 1, 2), legend = c("Truth", "Estimate", "95% CI"),
-# #       lwd = 3, col = c("red", "green", "blue"))
-# 
-# # legend("topright",
-# #        # value depending on the windows size
-# #        lty = c(1, 1, 2), legend = c("Truth", "Estimate", "95% CI"),
-# #        lwd = 3, col = c("red", "green", "blue"),
-# #        xpd =FALSE, horiz = TRUE) # You need to specify this graphical parameter to
-# # # put the legend outside the plot
-# 
-# 
-# 
-# # Back to the default graphical parameters
-# #on.exit(par(opar))
-# 
