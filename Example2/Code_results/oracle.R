@@ -34,12 +34,6 @@ library(rmutil)
 library(BetaBinom)
 library(poisson)
 
-#install_github("feizhe/SSHDI")
-
-setwd("C:/Users/echo0/Box Sync/RuiYang/Project3-IntervalCensoring/Code/Results/IC30/500x1000_Identity/complete")
-
-#setwd("~/Rui/Gang")
-#setwd("F:/R/Rui")
 
 # Loading
 beta_n200p200_Ind <- read_excel("Oracle.xlsx", col_names=FALSE)
@@ -61,4 +55,5 @@ for (i in 1:length(bet_Oracle[1, ])) {
 }
 cat('Empirical SE for oracle:', round(ese_oracle, 3))
 cat("\n")
+
 
