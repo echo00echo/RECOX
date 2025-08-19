@@ -27,15 +27,9 @@ library(cowplot)
 library(installr)
 library(qqplotr)
 
-rm(list=ls())
-setwd("C:/Users/echo0/Box Sync/RuiYang/Project3-IntervalCensoring/Code/Results/IC30/500x1000_Identity/complete")
-
-
-#a <- loadWorkbook('C:/Users/echo0/Box Sync/RuiYang/Project3-IntervalCensoring/Code/1026/yourExcel1.xlsx')
-#b <- loadWorkbook('C:/Users/echo0/Box Sync/RuiYang/Project3-IntervalCensoring/Code/1026/yourExcel5.xlsx')
-a <- loadWorkbook('C:/Users/echo0/Box Sync/RuiYang/Project3-IntervalCensoring/Code/Results/IC30/500x1000_Identity/complete/n500p1000_beta_p_Identity.xlsx')
-b <- loadWorkbook('C:/Users/echo0/Box Sync/RuiYang/Project3-IntervalCensoring/Code/Results/IC30/500x1000_Identity/complete/n500p1000_sample_p_Identity.xlsx')
-c <- loadWorkbook('C:/Users/echo0/Box Sync/RuiYang/Project3-IntervalCensoring/code/Results/IC30/500x1000_Identity/complete/n500p1000_screening_sample_p.xlsx')
+a <- loadWorkbook('C:/Users/n500p1000_beta_p_Identity.xlsx')
+b <- loadWorkbook('C:/Users/n500p1000_sample_p_Identity.xlsx')
+c <- loadWorkbook('C:/Users/n500p1000_screening_sample_p.xlsx')
 #sheetNames <- sheets(a)
 #for(i in 1:length(sheetNames))
 #{
@@ -136,10 +130,6 @@ for (k in 1:100){
 
   nzero_u_pv.all <-  c(nzero_u_pv.all, unlist(nzero_u_pv))#non-zero signals chosen by unbiased p-values and Bonferroni correction at each replication
   
-  
-  
-  
-  
   # Selection frequency (from testing) for each beta_j based on unbiased pvalue 
   temptable <- table(nzero_u_pv.all) # frequency of each beta.j to be selected
   sel_freq_u_pv<-rep(0,p)
@@ -157,21 +147,11 @@ for (k in 1:100){
   cat("\n")
   
   
-  
-  
-  
-  
-  
-  
-  
   pvs_b<-2*(1-pnorm(abs(Bet_SPARES)/sds_b))  #p-value biased
   nzero_b_pv <- (1:p)[pvs_b<0.05/p & !is.na(pvs_b)] #non-zero signals chosen by biased p-values and Bonferroni correction
 
-  
-  
   nzero_b_pv.all <-  c(nzero_b_pv.all, unlist(nzero_b_pv))#non-zero signals chosen by biased p-values and Bonferroni correction at each replication
  
-  
   
   # Selection frequency (from testing) for each beta_j based on biased pvalue 
   temptable <- table(nzero_b_pv.all) # frequency of each beta.j to be selected
@@ -188,12 +168,6 @@ for (k in 1:100){
   ave_0_s_freq_b_pv <- round(mean(s_freq_b_pv[c(2:49, 51:99, 101:149, 151:199, 201:1000)]), 3) 
   cat('# Selection frequency for 0s from testing_biased_pv:', ave_0_s_freq_b_pv)
   cat("\n")
-  
-  
-  
-  
-
-
   
   
   
@@ -218,27 +192,6 @@ for (k in 1:100){
   cat("Active set from each replication-biased:", nzero_b_pv)
   
   cat("\n")
-  
-
-  
-  
-  ### unbiased TP & FP based on the test
-  #TP.LASSO_u <- c(TP.LASSO_u, sum(as.numeric(nzero_u %in% c(1, 2, 6, 7, 10))))
-  #FP.LASSO_u <- c(FP.LASSO_u, sum(as.numeric(nzero_u %in% c(3:5, 8, 9))))
-  #cat('TP_u:', mean(TP.LASSO_u))  
-  #cat("\n")
-  #cat('FP_u:', mean(FP.LASSO_u))  
-  #cat("\n")
-  
-  
-  ### biased TP & FP based on the test
-  #TP.LASSO_b <- c(TP.LASSO_b, sum(as.numeric(nzero_b %in% c(1, 2, 6, 7, 10))))
-  #FP.LASSO_b <- c(FP.LASSO_b, sum(as.numeric(nzero_b %in% c(3:5, 8, 9))))
-  #cat('TP_b:', mean(TP.LASSO_b))  
-  #cat("\n")
-  #cat('FP_b:', mean(FP.LASSO_b))  
-  #cat("\n")
-  
   
   
   # asympotic SE from each replication
@@ -270,9 +223,6 @@ for (k in 1:100){
   ave_0_ase_final_b <- round(mean(ase_final_b[c(2:49, 51:99, 101:149, 151:199, 201:1000)], na.rm=TRUE), 3) 
   cat('Average of asympotic SE for 0s - biased:', ave_0_ase_final_b)
   cat("\n")
-  
-  
-  
   
   
   # asymptotic 95% CI for each beta.j* - unbiased
@@ -382,7 +332,6 @@ for (k in 1:100){
   
   
   
-  
   # alpha level (should be 5%) - unbiased: prob of rejecting the null hypothesis when it was true. 
   # i.e. 5 times out of 100, the CI will not contain the estimate
   for (i in 1:length(LL_u[1, ])) {
@@ -438,42 +387,8 @@ for (k in 1:100){
   cat('Empirical Type I error rate for 0s:', ave_0_alpha_level)
   cat("\n")
   
-  # Oracle estimation
-#  oracle <- round(colMeans(bet.oracle.all), 3)
-#  cat('Oracle', oracle[c(1,2,6,7,10)])
-#  cat("\n")
   
-  
-  
-#  ave_0_oracle <- round(mean(oracle[c(3:5, 8 ,9)]), 3) 
-#  cat('Oracle for 0s:', ave_0_oracle)
-#  cat("\n")
-  
-  
-  
-  # Empirical SE for oracle
-#  for (i in 1:length(bet.oracle.all[1, ])) {
-    #  ese_oracle[i] <- sd(bet.oracle.all[, i])/sqrt(sum(!is.na(bet.oracle.all[, i])))
-#    ese_oracle[i] <- sd(bet.oracle.all[, i])   
-#  }
-#  cat('Empirical SE for oracle:', round(ese_oracle, 3)[c(1,2,6,7,10)])
-#  cat("\n")
-  
-  
-  
-#  ave_0_ese_oracle <- round(mean(ese_oracle[c(3:5, 8 ,9)]), 3) 
-#  cat('Empirical SE for oracle:', ave_0_ese_oracle)
-#  cat("\n")
-  
-  
-  
-  # MSE
-#  MSE.LASSO <- c(MSE.LASSO, matrix(c(Bet_SPARES-bet0),1,p)%*%VarCovS%*%t(matrix(c(Bet_SPARES-bet0),1,p)))
-#  cat('MSE', round(median(MSE.LASSO),3)) 
-#  cat("\n")
-#  cat('SD of MSE', round(sd(MSE.LASSO),3)) 
-#  cat("\n")
-  
+
   print(k)  
   flush.console()
   
@@ -484,12 +399,7 @@ for (k in 1:100){
 
 
 # Outputs
-#bet.oracle.all
-#bet.rec
-#pvalues
-#ase
-#sds
-#vars.all
+
 
 write.csv(vars_b.all,'Vars_b_Identity_0.5_I30_B400_n500.csv')
 write.csv(vars_u.all,'Vars_u_Identity_I30_B400_n500.csv')
@@ -520,4 +430,5 @@ mylist <- list("bet"=bet.final, "bet_0s"=ave_0_bet.final,
 
 
 cat(capture.output(print(mylist), file="Identity_n500_p1000_IC30.txt"))
+
 
