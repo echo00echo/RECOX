@@ -71,4 +71,4 @@ The performance of the methods is evaluated based on the following criteria:
 
 If you use these codes or methods in your research, please cite the associated paper:
 
-Rui Yang, Jing Zhou, Hua Zhou, Zhe Fei, Gang Li. (2025). "Inference for High-dimensional Proportional Hazards Model with Mixed-Case Partly Interval-Censored Data." *(Journal/Preprint details forthcoming)*
+Rui Yang, Jin Zhou, Hua Zhou, Zhe Fei, Gang Li. (2025). "Inference for High-dimensional Proportional Hazards Model with Mixed-Case Partly Interval-Censored Data." *(Journal/Preprint details forthcoming)*
